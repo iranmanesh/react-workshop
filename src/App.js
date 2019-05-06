@@ -4,7 +4,9 @@ import Header from "./Components/Header";
 import Post from './Components/Post';
 import PostForm from "./Components/AddPost";
 import {connect} from 'react-redux';
-import {addPost} from "./actions/postActions";
+import {addPost,getData} from "./actions/postActions";
+import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
 class App extends React.Component {
 
@@ -24,7 +26,9 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-
+        console.log('started');
+        this.props.fetchData();
+        console.log('ending');
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -62,6 +66,9 @@ const mapDispatchToProps = (Dispatch) => {
     return {
         addPostDispatch: (post) => {
             Dispatch(addPost(post))
+        },
+        fetchData:()=>{
+            Dispatch(getData())
         }
     }
 }
